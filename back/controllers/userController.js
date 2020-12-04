@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
-// @desc Auth user & get toker
+// @desc Auth user & get token
 // @route POST /api/user/login
 // @access Public
 const authUser = asyncHandler(async (req, res) => {
@@ -24,4 +24,13 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser };
+// @desc Get user profile
+// @route GET /api/user/profile
+// @access Private
+const getUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  res.send("success!");
+});
+
+export { authUser, getUserProfile };
