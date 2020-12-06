@@ -34,7 +34,7 @@ const RegisterScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match!");
     } else {
-      // Dispatch register
+      // Dispatch register function
       dispatch(registerAction(name, email, password));
     }
   };
