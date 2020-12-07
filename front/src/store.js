@@ -6,7 +6,7 @@ import {
   productDetailsReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { userDetailsReducer, userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import { userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -15,6 +15,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
 // Initialize state from localStorage if it's there
