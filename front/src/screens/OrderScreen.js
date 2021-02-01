@@ -21,6 +21,8 @@ const OrderScreen = ({ match }) => {
   useEffect(() => {
     if (!order || order._id !== orderId || successPay) {
       dispatch(getOrderDetails(orderId));
+    } else if(!order.isPaid) {
+      
     }
   }, [order, orderId, successPay, dispatch]);
 
