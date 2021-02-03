@@ -38,8 +38,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       payload: data,
     });
     dispatch({
-      type: CART_CLEAR_ITEMS,
-      payload: data,
+      type: CART_CLEAR_ITEMS
     });
     localStorage.removeItem("cartItems");
   } catch (error) {
