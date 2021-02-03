@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getOrderDetails } from "../actions/orderActions";
-import { orderDetailsReducer } from "../reducers/orderReducers";
+import { getOrderDetails, payOrder } from "../actions/orderActions";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
 const OrderScreen = ({ match }) => {
   const dispatch = useDispatch();
@@ -20,9 +20,9 @@ const OrderScreen = ({ match }) => {
 
   useEffect(() => {
     if (!order || order._id !== orderId || successPay) {
+      dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(orderId));
-    } else if(!order.isPaid) {
-      
+    } else if (!order.isPaid) {
     }
   }, [order, orderId, successPay, dispatch]);
 
@@ -36,6 +36,10 @@ const OrderScreen = ({ match }) => {
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
   }
+
+  const successPaymentHandler = () => {
+    dispatch(payOrder(orderId));
+  };
 
   return loading ? (
     <Loader />
@@ -139,10 +143,22 @@ const OrderScreen = ({ match }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax</Col>
+                  <Col>Total</Col>
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {!order.isPaid && (
+                <ListGroup.Item>
+                  {loadingPay && <Loader />}
+                  <Button
+                    className="btn btn-primary btn-block"
+                    type="button"
+                    onClick={successPaymentHandler}
+                  >
+                    Pay
+                  </Button>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>
