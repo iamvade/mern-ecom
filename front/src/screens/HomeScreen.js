@@ -4,14 +4,14 @@ import { Col, Row } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Product from "../components/Product";
-import { listProductsAction } from "../actions/productActions";
+import { listProducts } from "../actions/productActions";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
   useEffect(() => {
-    dispatch(listProductsAction());
+    dispatch(listProducts());
   }, [dispatch]);
   return (
     <>
